@@ -1,0 +1,23 @@
+name: Metrics
+on:
+  schedule: [{cron: "0 0 * * *"}]
+  workflow_dispatch:
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+    permissions:
+      contents: write
+    timeout-minutes: 5
+
+    steps:
+      - name: Kembec RSS
+        uses: lowlighter/metrics@latest
+        with:
+          filename: metrics.plugin.rss.svg
+          token: NOT_NEEDED
+          plugin_rss: yes
+          plugin_rss_source: https://kembec.com/rss.xml
+          plugin_rss_limit: 10
